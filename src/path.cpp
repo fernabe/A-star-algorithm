@@ -13,6 +13,7 @@ Path::Path(std::vector<std::vector<int>> maze, Node *start, Node *end)
 
 void Path::CalculatePath()
 {
+    std::cout << "Calculate path:" << std::endl << std::endl;
     while (open_list.size() > 0)
     {
         SortOpenList();
@@ -28,6 +29,8 @@ void Path::CalculatePath()
         }
         CheckNeighbors(current_node);
     }
+    if( open_list.size() == 0)
+        std::cout << "There is no way possible between this points" << std::endl << std::endl;
 }
 
 bool Compare(Node *a, Node *b)
@@ -112,7 +115,6 @@ bool Path::CheckOpenList(int x, int y, Node *current)
 
 void Path::PrintPath(Node *end_node)
 {
-  
     while( end_node->GetParent() != nullptr){
         maze.at(end_node->GetPosX()).at(end_node->GetPosY()) = 2;
         end_node = end_node->GetParent();
@@ -120,17 +122,30 @@ void Path::PrintPath(Node *end_node)
 
     maze.at(end_node->GetPosX()).at(end_node->GetPosY()) = 2;
 
+      std::cout << "    " ;
+    for(size_t i = 0; i < maze.size(); ++i)
+        std::cout << "==" ;
+
+    std::cout << std::endl;
+
     for(size_t i = 0; i < maze.size(); ++i)
     {
+          std::cout << "||  " ;
         for(size_t j = 0; j < maze[i].size(); ++j)
         {
-            if( maze.at(i).at(j) == 0)
-                std::cout << "." << "\t";
-            else if( maze.at(i).at(j) == 1 )
-                std::cout << "|" << "\t";
+            if(maze.at(i).at(j) == 1)
+                std::cout << ".";
+            else if(maze.at(i).at(j) == 2)
+                std::cout << "*";
             else
-                std::cout << "*" << "\t";
+                std::cout << " ";
+            std::cout << " ";
         }
-        std::cout << std::endl;
+        std::cout << "  ||" << std::endl;
     }
+
+    std::cout << "    " ;
+    for(size_t i = 0; i < maze.size(); ++i)
+        std::cout << "==" ;
+    std::cout << std::endl << std::endl;
 }
