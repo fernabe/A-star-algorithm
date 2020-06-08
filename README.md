@@ -1,7 +1,7 @@
 # A-star-algorithm
 
 Implementation of A* path search algorithm in c++.
-Currently only shows the path in console. path search algorithm. Soon I will add a graphic interface with sdl.
+Currently only shows the path in console. Soon I will add a graphic interface with sdl.
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
